@@ -1,0 +1,64 @@
+{% extends 'trainers/trainerresult.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{%block contents%}
+<table border="3px solid red">
+    <tr><th>cosmoname</th>
+    <th>cosmoemail</th>
+        <th>exam title</th>
+        <th>trainername</th>
+        <th>answer1</th>
+        <th>answer2</th>
+        <th>answer3</th>
+        <th>answer4</th>
+        <th>answer5</th>
+        <th>answer6</th>
+        <th>answer7</th>
+        <th>answer8</th>
+        <th>answer9</th>
+        <th>answer10</th>
+        <th>score</th>
+        <th>submit</th></tr>
+    {% for x in message1%}
+    <form action="/saveres2/?id={{x.id}}" method="post">
+        {% csrf_token%}
+
+    <tr><td>{{x.cosmonaut.name}}</td>
+        <td>{{x.cosmonaut.mail}}</td>
+        <td>{{x.title}}<input type="hidden" value="{{x.title}}" name="exam_title"></td>
+        <td>{{x.trainer.name}}<input type="hidden" value="{{x.cosmonaut.id}}" name="t_name{{x.id}}"></td>
+        <td>{{x.answer1}}<input type="hidden" value="{{x.answer1}}" name="ans1"> </td>
+        <td>{{x.answer2}}<input type="hidden" value="{{x.answer2}}" name="ans2"></td>
+        <td>{{x.answer3}}<input type="hidden" value="{{x.answer3}}" name="ans3"></td>
+        <td>{{x.answer4}}<input type="hidden" value="{{x.answer4}}" name="ans4"></td>
+        <td>{{x.answer5}}<input type="hidden" value="{{x.answer5}}" name="ans5"></td>
+        <td>{{x.answer6}}<input type="hidden" value="{{x.answer6}}" name="ans6"></td>
+        <td>{{x.answer7}}<input type="hidden" value="{{x.answer7}}" name="ans7"></td>
+        <td>{{x.answer8}}<input type="hidden" value="{{x.answer8}}" name="ans8"></td>
+        <td>{{x.answer9}}<input type="hidden" value="{{x.answer9}}" name="ans9"></td>
+        <td>{{x.answer10}}<input type="hidden" value="{{x.answer10}}" name="ans10"></td>
+        <td><input type="text" name="score{{x.id}}"  id="score{{x.id}}" value=""></td>
+
+  {%if cosmospc_res%}
+        {% for y in cosmospc_res%}
+            {%if x.cosmonaut == y.cosmonaut%}
+          <script>
+                document.getElementById('score{{x.id}}').value={{y.result}}
+                       </script>
+            {%endif%}
+        {%endfor%}
+        {%endif%}
+
+        <td><input type="submit" value="submit"></td>
+    </tr>
+    </form>
+        {% endfor %}
+
+</table>
+{%endblock%}
+</body>

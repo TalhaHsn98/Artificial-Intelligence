@@ -1,0 +1,108 @@
+
+{% load staticfiles%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{%  static 'css/bootstrap.min.css'%}"/>
+	<link rel="stylesheet" href="{%  static 'css/font-awesome.min.css'%}"/>
+	<link rel="stylesheet" href="{%  static 'css/magnific-popup.css'%}"/>
+	<link rel="stylesheet" href="{%  static 'css/owl.carousel.min.css'%}"/>
+	<link rel="stylesheet" href="{%  static 'css/style.css'%}"/>
+	<link rel="stylesheet" href="{%  static 'css/animate.css'%}"/>
+    <link rel="stylesheet" href="{%  static 'css/bootstrap.min.css'%}"/>
+	<link rel="stylesheet" href="{%  static 'css/bootstrap-datetimepicker.css'%}"/>
+	<link rel="stylesheet" href="{%  static 'css/bootstrap-datetimepicker.min.css'%}"/>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/jquery-3.2.1.min.js'%}"></script>
+
+    <script src="{% static 'js/bootstrap-datetimepicker.js'%}"></script>
+    <script src="{% static 'js/bootstrap-datetimepicker.min.js'%}"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){
+
+        $("#id_date").datetimepicker({
+
+        });
+        });
+    </script>
+
+</head>
+<header class="header-section">
+		<div class="container">
+			<a href="index.html" class="site-logo">
+
+			</a>
+			<!-- Switch button -->
+			<div class="nav-switch">
+				<div class="ns-bar"></div>
+			</div>
+			<div class="header-right">
+				<ul class="main-menu">
+					<li class="active"><a href="{%  url 'trainerresult'%}?id={{request.session.trainer}}">Home</a></li>
+					<li><a href="{% url 'cosmonautdetails'%}?id={{request.session.trainer}}">Cosmonaut Details</a></li>
+					<li><a href="{% url 'createexam'%}?id={{request.session.trainer}}">Create Exam</a></li>
+
+					<li><a href="{% url 'cosmonautresults1'%}?id={{request.session.trainer}}">Cosmonaut Results</a></li>
+					<li><a href="{% url 'logout'%}">logout</a></li>
+
+				</ul>
+
+			</div>
+		</div>
+</header>
+
+
+
+<body>
+
+<div class="myposition">
+{% block contents%}
+<table border="3px solid red">
+    <tr><th>cosmoname</th>
+    <th>cosmoemail</th>
+        <th>exam title</th>
+        <th>trainername</th>
+        <th>answer1</th>
+        <th>answer2</th>
+        <th>answer3</th>
+        <th>answer4</th>
+        <th>answer5</th>
+        <th>score</th>
+        <th>submit</th></tr>
+    {% for x in message %}
+    <form action="/saveres1/?id={{x.id}}" method="post">
+        {% csrf_token%}
+
+    <tr><td>{{x.cosmonaut.name}}</td>
+        <td>{{x.cosmonaut.mail}}</td>
+        <td>{{x.title}}<input type="hidden" value="{{x.title}}" name="exam_title"></td>
+        <td>{{x.trainer.name}}<input type="hidden" value="{{x.cosmonaut.id}}" name="t_name{{x.id}}"></td>
+        <td>{{x.answer1}}<input type="hidden" value="{{x.answer1}}" name="ans1"> </td>
+        <td>{{x.answer2}}<input type="hidden" value="{{x.answer2}}" name="ans2"></td>
+        <td>{{x.answer3}}<input type="hidden" value="{{x.answer3}}" name="ans3"></td>
+        <td>{{x.answer4}}<input type="hidden" value="{{x.answer4}}" name="ans4"></td>
+        <td>{{x.answer5}}<input type="hidden" value="{{x.answer5}}" name="ans5"></td>
+        <td><input type="text" name="score{{x.id}}"  id="score{{x.id}}" value=""></td>
+
+  {%if cosmo_res%}
+        {% for y in cosmo_res%}
+            {%if x.cosmonaut == y.cosmonaut%}
+          <script>
+                document.getElementById('score{{x.id}}').value={{y.result}}
+                       </script>
+            {%endif%}
+        {%endfor%}
+        {%endif%}
+
+        <td><input type="submit" value="submit"></td>
+    </tr>
+    </form>
+        {% endfor %}
+    {% endblock %}
+
+</table>
+</div>
+</body>
+</html>

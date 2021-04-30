@@ -1,0 +1,44 @@
+{%  extends 'admins/adminindex.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{% block contents%}
+<body>
+<center>
+    <h2 style="align:center">Admin View Register Users</h2>
+</center>
+<table border="2px" align="center">
+
+            <tr>
+                <th style="color:   rkblue">SNo</th>
+                <th style="color:darkblue">name</th>
+                <th style="color:darkblue">uid</th>
+                <th style="color:darkblue">mail</th>
+                <th style="color:darkblue">status</th>
+                <th style="color:darkblue">Activate</th>
+                <th style="color:darkblue">mobileno</th>
+            </tr>
+
+     {% for x in qs %}
+            <tr>
+                <td style="color:blue">{{x.id}}</td>
+                <td style="color:darkolivegreen">{{x.name}}</td>
+                <td style="color:red">{{x.uid}}</td>
+                <td style="color:red">{{x.mail}}</td>
+                <td style="color:red">{{x.mobileno}}</td>
+                <td style="color:red">{{x.status}}</td>
+
+            {% if x.status == 'waiting' %}
+            <td> <a href="/activatecosmonauts/?pid={{ x.id }}" >Activate</a></td>
+            {% else %}
+            <td> Activated</td>
+            {% endif %}
+            </tr>
+            {% endfor %}
+</table>
+{% endblock%}
+</body>
+</html>

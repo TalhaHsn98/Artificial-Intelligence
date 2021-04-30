@@ -1,0 +1,26 @@
+{% extends 'loggedin.html'%}
+
+{% block contents%}
+<h2>Available Exams</h2>
+
+<table border="2px">
+    <tr>
+        <th>S.No</th>
+        <th>Exam Name</th>
+        <th>Created By</th>
+        <th>Exams Start</th>
+        <th>Write Exam</th>
+    </tr>
+
+{% for i in objects %}
+<tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{i.title}}</td>
+    <td>{{i.trainername}}</td>
+    <td>{{i.date}}</td>
+    <td><a href="{% url 'trainingprocess'  %}?title={{i.title}}">Write Exam</a> </td>
+</tr>
+{% endfor%}
+
+    </table>
+{%endblock%}

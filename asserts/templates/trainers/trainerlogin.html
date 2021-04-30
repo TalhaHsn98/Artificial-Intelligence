@@ -1,0 +1,26 @@
+{% extends 'index1.html'%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block contents%}
+
+    <form action="{% url 'trainerlogincheck'%}" method="POST">
+        {% csrf_token %}
+        <h2>Trainer login</h2>
+        <label for="uname" style="color:white;">username:</label></br>
+    <input type="text" name="uname" value=""></br>
+        <label for="pwd" style="color:white;">password:</label></br>
+    <input type="password" name="pwd" value=""></br></br>
+        <input type="submit" value="login">
+        <a href="{% url 'trainerregister'%}">Register</a>
+    </form>
+{{message}}
+
+{% endblock%}
+</body>
+</html>

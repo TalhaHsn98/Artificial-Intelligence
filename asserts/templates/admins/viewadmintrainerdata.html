@@ -1,0 +1,52 @@
+{%  extends 'admins/adminindex.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{% block contents%}
+<body>
+<center>
+    <h2 style="align:center">Admin View Register Trainers</h2>
+</center>
+<table border="2px" align="center">
+            <tr>
+                <th style="color: darkblue">SNo</th>
+                <th style="color:darkblue">name</th>
+                <th style="color:darkblue">uid</th>
+                <th style="color:darkblue">mail</th>
+                <th style="color:darkblue">passwd</th>
+                <th style="color:darkblue">qualification</th>
+                <th style="color:darkblue">designation</th>
+                <th style="color:darkblue">Experience</th>
+                <th style="color:darkblue">mobileno</th>
+                <th style="color:darkblue">authkey</th>
+                <th style="color:darkblue">status</th>
+                <th style="color:darkblue">Activate</th>
+            </tr>
+    {% for x in qs%}
+    <tr>
+    <td style="color:blue">{{x.id}}</td>
+                <td style="color:darkolivegreen">{{x.name}}</td>
+                <td style="color:red">{{x.uid}}</td>
+                <td style="color:red">{{x.mail}}</td>
+                <td style="color:red">{{x.passwd}}</td>
+                <td style="color:red">{{x.qualification}}</td>
+                <td style="color:red">{{x.designation}}</td>
+                <td style="color:red">{{x.Experience}}</td>
+                <td style="color:red">{{x.mobileno}}</td>
+                <td style="color:red">{{x.authkey}}</td>
+                <td style="color:red">{{x.status}}</td>
+
+            {% if x.status == 'waiting' %}
+    <td> <a href="/activatetrainers/?pid={{ x.id }}" >Activate</a></td>
+       {% else %}
+            <td> Activated</td>
+            {% endif %}
+            </tr>
+            {% endfor %}
+</table>
+{% endblock%}
+</body>
+</html>

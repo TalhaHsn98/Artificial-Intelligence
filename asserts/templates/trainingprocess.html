@@ -1,0 +1,79 @@
+{% extends 'loggedin.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<script>
+
+</script>
+
+</head>
+<body>
+{% block contents%}
+
+<table border="1px solid blue" align="center">
+<form action="/techinicalresult/" method="POST">
+    {% csrf_token%}
+
+    title:<input type="text" name="title" value="{{exam_obj.title}}"readonly><input type="hidden" name="tid" value="{{exam_obj.trainername.id}}"</br></br>
+    {%if exam_info == 'yes'%}
+    <label for="q1">Q:1)What do you do on the International Space Station (ISS)?</label></br>
+    ans:<textarea rows="6" cols="50" name="q1" onpaste="return false;"></textarea></br></br>
+    <label for="q2">Q:2)how do rockets work?</label></br></br>
+    ans:<textarea rows="6" cols="50" name="q2" onpaste="return false;"></textarea></br></br>
+    <label for="q3">Q:3)How do we put spacecraft into orbit?</label></br>
+     ans:<textarea rows="6" cols="50" name="q3" onpaste="return false;"></textarea></br></br>
+    <label for="q4">Q:4)How large of an antenna would you need to connect to the ISS's WiFi network from Earth?</label></br>
+     ans:<textarea rows="6" cols="50" name="q4" onpaste="return false;"></textarea></br></br>
+    <label for="q5">How Rocket works on conservation of momentum?</label></br></br>
+     ans:<textarea rows="6" cols="50" name="q5" onpaste="return false;"></textarea></br></br>
+    <input type="submit" value="submit">
+</form>
+</table>
+{%elif exam_info == 'not yet'%}
+<h2 style="color:red">Sorry exam not yet Scheduled!!!</h2>
+
+{%else%}
+{%if datetime != 'empty'%}
+<script>
+var d="{{datetime}}"
+// Set the date we're counting down to
+var countDownDate = new Date(d).getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is over, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    window.location.href='/trainingprocess/?title={{exam_obj.title}}'
+  }
+}, 1000);
+</script>
+
+<h2 style="color:red">Sorry exam not yet started!!!</h2>
+ Exam Starts in <span id="demo"></span>
+{%else%}
+<h2 style="color:red">Sorry exam Expired!!!</h2>
+{%endif%}
+{%endif%}
+{% endblock %}
+</body>
+</html>

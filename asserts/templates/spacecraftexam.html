@@ -1,0 +1,41 @@
+{% extends 'loggedin.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{%block contents%}
+
+<h1>welcome to spacecraft exam</h1>
+<form action="/spacecraftresult/" method="POST">
+    {% csrf_token%}
+
+    title:<input type="text" name="title" value="{{spc_obj.title}}"readonly><input type="hidden" name="tid" value="{{spc_obj.trainername.id}}"></br></br>
+    <label for="q1">Q:1)what is diff between rockets and spacecrafts?</label></br>
+    ans:<textarea rows="6" cols="50" name="q1" onpaste="return false;"></textarea></br></br>
+    <label for="q2">Q:2)What is mean by International Space Station (ISS)?</label></br></br>
+    ans:<textarea rows="6" cols="50" name="q2" onpaste="return false;"></textarea></br></br>
+    <label for="q3">Q:3)How do we put spacecraft into orbit?</label></br>
+     ans:<textarea rows="6" cols="50" name="q3" onpaste="return false;"></textarea></br></br>
+    <label for="q4">Q:4)first cosmonaut of russia?</label></br>
+     ans:<textarea rows="6" cols="50" name="q4" onpaste="return false;"></textarea></br></br>
+    <label for="q5">Q:5)what is use of International space station?</label></br></br>
+     ans:<textarea rows="6" cols="50" name="q5" onpaste="return false;"></textarea></br></br>
+    <label for="q6">Q:6)What is the white smoke that comes out of rockets?</label></br></br>
+     ans:<textarea rows="6" cols="50" name="q6" onpaste="return false;"></textarea></br></br>
+    <label for="q7">Q:7)How does a spaceship get back to earth?</label></br></br>
+     ans:<textarea rows="6" cols="50" name="q7" onpaste="return false;"></textarea></br></br>
+     <label for="q8">Q:8)What are the 4 main parts of a rocket?</label></br></br>
+     ans:<textarea rows="6" cols="50" name="q8" onpaste="return false;"></textarea></br></br>
+    <label for="q9">Q:9)What is the structure of a rocket?</label></br></br>
+     ans:<textarea rows="6" cols="50" name="q9" onpaste="return false;"></textarea></br></br>
+     <label for="q10">Q:10)What is the structure of a rocket?</label></br></br>
+     ans:<textarea rows="6" cols="50" name="q10" onpaste="return false;"></textarea></br></br>
+
+    <input type="submit" value="submit">
+</form>
+{%endblock%}
+</body>
+</html>

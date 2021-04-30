@@ -1,0 +1,26 @@
+{% extends 'index1.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block contents%}
+<form action="{% url 'cosmologincheck'%}" method="POST">
+    {% csrf_token %}
+    <h2>Cosmonaut login</h2></br></br></br>
+    <label for="loginid" style="color:white;">username:</label></br>
+<input type="txt" name="loginid" value=""></br>
+    <label for="password" style="color:white;">password:</label></br>
+<input type="password" name="password" value=""></br></br>
+<input type="submit" value="login">
+<a href="{% url 'cosmoregistration'%}">Register</a>
+</form>
+<table style="color:white">
+{{message}}
+</table>
+
+    {% endblock%}
+</body>
+</html>

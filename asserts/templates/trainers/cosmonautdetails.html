@@ -1,0 +1,27 @@
+{% extends 'trainers/trainerresult.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block contents%}
+
+<table border="2px" align="center">
+            <tr>
+                <th style="color: darkblue">Name</th>
+                <th style="color:darkblue">uid</th>
+                <th style="color:darkblue">mail</th>
+                <th style="color:darkblue">mobileno</th>
+            </tr>
+    {% for x in s_obj%}
+    <tr><td>{{x.name}}</td>
+    <td>{{x.uid}}</td>
+    <td>{{x.mail}}</td>
+    <td>{{x.mobileno}}</td></tr>
+    {% endfor %}
+</table>
+{% endblock%}
+</body>
+</html>

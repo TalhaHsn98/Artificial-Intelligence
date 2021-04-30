@@ -1,0 +1,57 @@
+{%  extends 'admins/adminindex.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{%block contents%}
+<h1>final report of space exam</h1>
+<table border="2px solid blue" align="center">
+    <tr id="trow">
+        <th>cosmonaut name</th>
+        <th>Marks</th>
+        <th>Trainer Name</th>
+        <th>Send Offer</th>
+
+        {% for x in message%}
+        <script>
+            var tdata=document.getElementById('tname').innerHTML
+
+           if(tdata == "")
+           {
+                document.getElementById('tname').innerText='{{x.trainer.name}}'
+           }
+           else if(tdata == '{{x.trainer.name}}')
+           {
+
+           }
+           else
+           {
+            var row=document.getElementById('trow')
+           var x = row.insertCell(-1)
+           x.innerText='{{ x.trainer.name}}'
+           }
+
+        </script>
+        {% endfor%}
+
+
+    </tr>
+
+ </tr>
+    {% for x in message%}
+    <tr><td>{{x.cosmonaut.name}}</td>
+        <td>{{x.result}}</td>
+        <td id="tname">{{x.trainer.name}}</td>
+        <td><a href="{% url 'sendoffer'  %}?id={{x.cosmonaut.id}}">Send Offer</a> </td>
+{% endfor%}
+    </tr>
+</table>
+{%endblock%}
+</body>
+</html>
+
+</body>
+</html>

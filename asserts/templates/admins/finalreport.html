@@ -1,0 +1,98 @@
+{% extends 'admins/adminindex.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% block contents %}
+    <script>
+    function showTableData() {
+        document.getElementById('info').innerHTML = "";
+        var myTab = document.getElementById('report');
+
+        // LOOP THROUGH EACH ROW OF THE TABLE AFTER HEADER.
+        for (i = 1; i < myTab.rows.length; i++) {
+
+            // GET THE CELLS COLLECTION OF THE CURRENT ROW.
+            var objCells = myTab.rows.item(i).cells;
+
+            // LOOP THROUGH EACH CELL OF THE CURENT ROW TO READ CELL VALUES.
+            total=0;
+            count=1;
+            for (var j = 1; j < objCells.length-2; j++) {
+
+                if (objCells.item(j).innerHTML =='NA'){
+                    continue
+                }
+                else{
+
+                    total=(total+parseInt(objCells.item(j).innerHTML))/count;
+
+                    count++;
+                objCells.item(objCells.length-2).innerHTML=total;
+                }
+            }
+
+            }
+
+
+    }
+</script>
+</head>
+
+<body>
+<p id="info"></p>
+    <p><input type="button" id="bt" value="Show Table Data"  onclick="showTableData()" /></p>
+
+<h2 align="center">Final Report</h2></br>
+<table border="1" id="report" align="center">
+ <tr>
+        <th>cosmonautName</th>
+{% for x in trainers %}
+   <th>trainer-{{ x.name }}</th>
+{% endfor %}
+ <th>Final Report</th>
+ <th>Status</th>
+    </tr>
+
+{% for x,y in res.items %}
+    <tr>
+<form method="post" action="/activate/?id={% if y.items %}{{y.id}}{%else%}0{%endif%}">
+    {%csrf_token%}
+        {% if y.items %}
+            <td>{{ x }}</td>
+        {% for a,b in y.items %}
+            {%if a == 'id' %}
+                {%else%}
+
+                        <td>{{b}}<input type="hidden" value={{ b }} name="res{{ forloop.counter0 }}" id="res{{ forloop.counter0 }}{{forloop.parentloop.counter0}}" ></td>
+
+            {%endif%}
+        {% endfor %}
+    {%if final == 'NA'%}
+    <td>Waiting....</td>
+    {%else%}
+    {%for x in final%}
+        {%if x.cosmonaut.id == y.id%}
+        <td><input type="text"  value="{{x.avg}}" readonly></td>
+        {% else %}
+
+        {%endif%}
+
+    {%endfor%}
+
+    {%endif%}
+
+        <td><input type="submit" value="Activate"></td>
+            </form>
+    </tr>
+    <tr>
+
+
+    {% endif %}
+    </tr>
+{% endfor %}
+</table>
+{% endblock%}
+</body>
+</html>

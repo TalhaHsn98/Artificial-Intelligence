@@ -1,0 +1,27 @@
+{% extends 'index1.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block contents%}
+<form action="{% url 'cosmoregistration'%}"  method="POST">
+    {% csrf_token %}
+<table align="center" style="color:white;">
+    <h3>Registration of Cosmonaut</h3>
+    <tr><td>User Name</td><td>{{form.name}}</td></tr>
+    <tr><td>User Id</td><td>{{form.uid}}</td></tr>
+    <tr><td>User Email</td><td>{{form.mail}}</td></tr>
+    <tr><td>User Password</td><td>{{form.passwd}}</td></tr>
+    <tr><td>Confirm Password</td><td>{{form.cwpasswd}}</td></tr>
+    <tr><td>Mobile No</td><td>{{form.mobileno}}</td></tr>
+    <tr><td>Qualification</td><td>{{form.qualification}}</td></tr>
+    {{form.status}}
+    <tr><td><input type="submit" value="Register"></td></tr></br></br>
+</table>
+</form>
+{% endblock%}
+</body>
+</html>
